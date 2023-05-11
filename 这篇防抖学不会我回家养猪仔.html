@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- onkeyup 事件在用户释放键时 调用函数fn -->
+    <input type="text" onkeyup="fn()" id="fname">
+</body>
+</html>
+<script>
+   
+    var timeId = null; // 定义延时器ID
+    function fn(params) {
+        console.log('一直在输入了'); // 每次输入都会执行
+        if (timeId) {// 有延时器时，就清除延时器
+            clearInterval(timeId);
+        }
+         // 用户停止(最后一次)输入1秒后，执行console.log
+        timeId = setTimeout(function(){ // document.getElementById("fname").value  Input输入内容
+            console.log('最后一次输入完-->1秒后去调接口呀', document.getElementById("fname").value);
+        },1000)
+    }
+</script>
