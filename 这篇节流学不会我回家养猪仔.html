@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input  id="fname" type="button" value="下单" onclick="fn()">  
+</body>
+</html>
+<script>
+   
+    var timeId = null; // 定义延时器ID
+    // debugger
+    function fn(params) {
+        if (timeId) {// 有延时器时，就返回
+            return
+        }
+        timeId = setTimeout(function(){
+            console.log('第一次点击后-->1秒后去调下单接口接口呀,这个1秒内只执行一次');
+            timeId = null
+        },1000)
+    }
+</script>
