@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  let obj = {
+    name: "zyb",
+    age: 18,
+    height: 2.0,
+  };
+
+  
+  // 1、监听对象的一个属性的操作过程
+  // let _name = obj.name
+  // Object.defineProperty(obj, "name", {
+  //   set: function (newValue) {
+  //     console.log('监听设置name的值', newValue);
+  //     _name = newValue
+  //   },
+  //   get: function () {
+  //     console.log('监听获取name的值', _name);
+  //     return _name
+  //   }
+  // })
+  // obj.name
+  // obj.name = '9567'
+
+
+  // 2、监听对象的多个属性的操作过程
+  Object.keys(obj).forEach(key=>{
+    let value = obj[key];
+    Object.defineProperty(obj, key,{
+      set: function (newValue) {
+        console.log(`监听设置${key}新值：`, newValue);
+        value = newValue
+      },
+      get: function () {
+        console.log(`监听${key}获取新值：`, value);
+        return value
+      }
+    })
+  })
+
+  obj.name
+  obj.name = '9567'
+  obj.name
+
+  obj.age
+  obj.age = 100
+  obj.age
+</script>

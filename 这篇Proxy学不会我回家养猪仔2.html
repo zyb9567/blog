@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  let obj = {
+    name: "zyb",
+    age: 18,
+    height: 2.0,
+  };
+
+  
+  let p = new Proxy(obj, {
+    set: function (target, key, newValue, receiver) {
+      console.log(`监听${key}设置新值：`, newValue);
+      target[key] = newValue
+    },
+    get: function name(target, key) {
+      console.log(`监听${key}获取：`, target[key]);
+      return target[key]
+    },
+    deleteProperty: function (target, key) {
+      console.log(`监听${key}的删除`);
+      delete target[key]
+    }
+  })
+  p.name
+  p.name = '9567'
+  p.name
+
+  p.age
+  p.age = 100
+  p.age
+
+
+  //解决 vue2.0痛点 演示  对象新增、删除属性的监听
+
+  delete p.height
+  p.height
+
+  p.zyb = '9567'
+  p.zyb
+
+
+</script>
