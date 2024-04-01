@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  var name = 'window'
+
+
+// {} -> 对象
+// {} -> 代码块
+var person1 = {
+  name: 'person1',
+  foo1: function () {
+    console.log(this.name)
+  },
+  foo2: () => console.log(this.name),
+  foo3: function () {
+    return function () {
+      console.log(this.name)
+    }
+  },
+  foo4: function () {
+    
+    return () => {
+      console.log(this.name)
+    }
+  }
+}
+
+var person2 = { name: 'person2' }
+
+
+// 开始题目:
+person1.foo1(); // 通过函数名调用，this指向调用者，即person1, 隐式绑定 打印 person1
+person1.foo1.call(person2); //通过call调用，this指向call的第一个参数，即person2, 显式绑定 打印 person2
+
+person1.foo2(); // 箭头函数不绑定this，this指向外层作用域，即window, 打印 window
+person1.foo2.call(person2); // 箭头函数不绑定this，this指向外层作用域，即window, 打印 window
+
+person1.foo3()(); // 独立函数执行 默认绑定  this指向window  打印window
+person1.foo3.call(person2)(); // 独立函数执行 默认绑定  this指向window  打印window
+person1.foo3().call(person2); // 显示绑定，this指向 call的第一个参数  person2 打印person2
+
+person1.foo4()(); // 箭头函数  this指向 上层作用域的this，  person1，  打印persion1
+person1.foo4.call(person2)(); // 箭头函数  this指向 上层作用域的this，  person2，  打印persion2
+person1.foo4().call(person2);// 箭头函数不绑定this，  this指向 上层作用域的this，  person1，  person1
+
+
+
+  </script>
+</body>
+</html>
